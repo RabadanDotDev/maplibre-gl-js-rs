@@ -1,0 +1,12 @@
+[package]
+name = "maplibre-gl-js"
+version = "0.0.0"
+edition = "2024"
+description = "Unofficial MapLibre GL JS Rust bindings"
+license = "BSD-3-Clause"
+readme = "README.md"
+keywords = ["wasm", "maplibre-gl-js"]
+categories = ["wasm", "web-programming"]
+repository = "https://github.com/RabadanDotDev/maplibre-gl-js-rs"
+
+[dependencies]
