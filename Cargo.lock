@@ -720,6 +720,8 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
+ "devx-cmd",
  "devx-pre-commit",
+ "log",
  "simple_logger",
 ]
