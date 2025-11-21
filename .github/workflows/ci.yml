@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cargo + tool cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            ~/.cargo/.crates.toml
+            ~/.cargo/.crates2.json
+            ~/.cache/wasm-pack
+            target
+          key: cargo-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: cargo-${{ runner.os }}-
+
+      - name: Build xtask
+        run: cargo build -p xtask
+
+      - name: Install deps
+        run: cargo xtask install-dependencies
+
+      - name: Format
+        run: cargo xtask format --check-only
+
+      - name: Clippy
+        run: cargo xtask clippy
+
+      - name: Tests
+        run: cargo xtask regular-test
+
+      - name: Wasm tests (Chrome)
+        run: cargo xtask wasm-test headless-chrome
+
+      - name: Wasm tests (Firefox)
+        uses: coactions/setup-xvfb@v1
+        with:
+          run: cargo xtask wasm-test headless-firefox
+
+  docs:
+    runs-on: ubuntu-latest
+    needs: lint-test
+    if: github.repository_owner == 'RabadanDotDev' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cargo + tool cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            ~/.cargo/.crates.toml
+            ~/.cargo/.crates2.json
+            ~/.cache/wasm-pack
+            target
+          key: cargo-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: cargo-${{ runner.os }}-
+
+      - name: Build xtask
+        run: cargo build -p xtask
+
+      - name: Install deps
+        run: cargo xtask install-dependencies
+
+      - name: Build docs
+        run: BASE_PAGE_DIR=https://rabadandotdev.github.io/maplibre-gl-js-rs mdbook build doc
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: doc/book
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
