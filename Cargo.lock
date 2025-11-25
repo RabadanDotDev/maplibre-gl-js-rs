@@ -80,6 +80,7 @@ name = "maplibre-gl-js"
 version = "0.0.0"
 dependencies = [
  "wasm-bindgen",
+ "wasm-bindgen-futures",
  "wasm-bindgen-test",
  "web-sys",
 ]
