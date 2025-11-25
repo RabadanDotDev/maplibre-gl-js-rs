@@ -81,6 +81,7 @@ version = "0.0.0"
 dependencies = [
  "wasm-bindgen",
  "wasm-bindgen-test",
+ "web-sys",
 ]
 
 [[package]]
