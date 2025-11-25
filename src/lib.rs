@@ -7,5 +7,7 @@
 // single-threaded. Therefore, we need to allow this.
 #![allow(clippy::future_not_send)]
 
+pub mod bindings;
+
 #[cfg(test)]
 pub mod test_utils;
