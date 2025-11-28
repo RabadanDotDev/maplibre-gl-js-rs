@@ -8,6 +8,7 @@
 #![allow(clippy::future_not_send)]
 
 pub mod bindings;
+pub mod interface;
 
 #[cfg(test)]
 pub mod test_utils;
