@@ -10,4 +10,6 @@ extern "C" {
     #[wasm_bindgen(js_namespace = maplibregl)]
     #[derive(Debug, Clone, PartialEq)]
     pub type MapOptions;
+
+    // TODO: Add all the methods
 }
