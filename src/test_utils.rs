@@ -1,13 +1,81 @@
 //! # Shared test functions
 
+use std::marker::PhantomData;
+
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::JsFuture;
-use web_sys::{Document, HtmlScriptElement, js_sys};
+use web_sys::{Document, HtmlElement, HtmlScriptElement, js_sys};
 
 wasm_bindgen_test::wasm_bindgen_test_configure!(run_in_browser);
 
 const MAPLIBRE_SCRIPT_SRC: &str = "https://unpkg.com/maplibre-gl@^5.12.0/dist/maplibre-gl.js";
 const MAPLIBRE_ID: &str = "maplibre-gl-e1b6fcf0-2a8c-46ae-9c7e-deeb271d32d7";
+
+/// `web_sys::HtmlElement` which will clean up the element when it is dropped
+pub struct HtmlElementRAII<'a> {
+    html_element: HtmlElement,
+    lifetime: PhantomData<&'a ()>,
+}
+
+impl Drop for HtmlElementRAII<'_> {
+    fn drop(&mut self) {
+        self.html_element.remove();
+    }
+}
+
+impl HtmlElementRAII<'_> {
+    /// Get a copy of the underlying `web_sys::HtmlElement`
+    #[must_use]
+    pub fn cloned_ref(&self) -> HtmlElement {
+        self.html_element.clone()
+    }
+}
+
+/// Insert an arbitrary HTML element with a given tag.
+///
+/// This function assumes that the document and the body are loaded and
+/// available
+///
+/// # Panics
+///
+/// This function is only intended to run on tests, errors aren't handled and
+/// panics whenever anything goes wrong.
+#[must_use]
+pub fn gen_html_element<'a>(tag: &str) -> HtmlElementRAII<'a> {
+    let element = get_document()
+        .create_element(tag)
+        .expect("Creating an element should work");
+
+    let element_js: JsValue = element.into();
+    let html_element = HtmlElement::from(element_js);
+
+    get_document()
+        .body()
+        .expect("Document should have a body")
+        .append_child(&html_element)
+        .expect("Appending child should work");
+
+    HtmlElementRAII {
+        html_element,
+        lifetime: PhantomData,
+    }
+}
+
+/// Insert an arbitrary HTML element with a given tag and id.
+///
+/// This function assumes that the document and the body are loaded and
+/// available
+///
+/// # Panics
+///
+/// This function is only intended to run on tests, errors aren't handled and
+/// panics whenever anything goes wrong.
+#[must_use]
+pub fn gen_html_element_with_id<'a>(tag: &str, id: &str) -> HtmlElementRAII<'a> {
+    let element = gen_html_element(tag);
+    element.html_element.set_id(id);
+    element
+}
 
 fn get_document() -> Document {
     let window = web_sys::window().expect("Should be able to get the window");
