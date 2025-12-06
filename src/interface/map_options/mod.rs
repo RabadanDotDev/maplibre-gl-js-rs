@@ -11,7 +11,10 @@ pub use map_zoom::MapZoom;
 use serde::Serialize;
 
 use super::Error;
-use crate::{bindings, interface::LngLatLike};
+use crate::{
+    bindings,
+    interface::{LngLatLike, Map},
+};
 
 /// Options of a Map
 #[derive(Debug, PartialEq, Clone, Serialize)]
@@ -43,6 +46,15 @@ impl MapOptions {
             maplibre_logo: None,
             center: None,
         }
+    }
+
+    /// Create a `Map` with the specified options
+    ///
+    /// # Errors
+    ///
+    /// Propagates errors generated on converting the given options into JS
+    pub fn build(self) -> Result<Map, Error> {
+        Map::new(self)
     }
 
     /// Specify initial zoom level of the map
