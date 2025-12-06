@@ -1,0 +1,13 @@
+[package]
+name = "display-a-map"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+console_error_panic_hook = "0.1.7"
+log = "0.4.28"
+wasm-logger = "0.2.0"
+yew = { version = "0.21.0", features = ["csr"] }
+maplibre-gl-js = { path="../../"}
+
