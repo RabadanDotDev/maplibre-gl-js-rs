@@ -4,7 +4,10 @@ use std::marker::PhantomData;
 
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::JsFuture;
-use web_sys::{Document, HtmlElement, HtmlScriptElement, js_sys};
+use web_sys::{
+    Document, HtmlElement, HtmlScriptElement,
+    js_sys::{self, Reflect},
+};
 
 wasm_bindgen_test::wasm_bindgen_test_configure!(run_in_browser);
 
@@ -145,4 +148,16 @@ pub async fn load_maplibre_gl() {
     JsFuture::from(js_sys::Promise::new(&mut load_maplibre_gl_inner))
         .await
         .expect("Loading MapLibre gl should work");
+}
+
+/// Get the value from a `JsValue` given a key
+///
+/// # Panics
+///
+/// This function is only intended to run on tests, errors aren't handled and
+/// panics whenever anything goes wrong.
+#[must_use]
+pub fn get_value_from_object(value: &JsValue, key: &str) -> JsValue {
+    let key = serde_wasm_bindgen::to_value(key).expect("Conversion from str to JS should work");
+    Reflect::get(value, &key).expect("Key in should be in value")
 }
