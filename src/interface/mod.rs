@@ -2,10 +2,12 @@
 
 mod lng_lat;
 mod lng_lat_like;
+mod map;
 pub mod map_options;
 
 pub use serde_wasm_bindgen::Error;
 
 pub use lng_lat::LngLat;
 pub use lng_lat_like::LngLatLike;
+pub use map::Map;
 pub use map_options::MapOptions;
