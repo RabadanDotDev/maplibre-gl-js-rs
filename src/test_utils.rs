@@ -161,3 +161,19 @@ pub fn get_value_from_object(value: &JsValue, key: &str) -> JsValue {
     let key = serde_wasm_bindgen::to_value(key).expect("Conversion from str to JS should work");
     Reflect::get(value, &key).expect("Key in should be in value")
 }
+
+/// Get all the possible keys of a `JsValue`
+///
+/// # Panics
+///
+/// This function is only intended to run on tests, errors aren't handled and
+/// panics whenever anything goes wrong.
+#[must_use]
+pub fn get_key_list_from_object(value: &JsValue) -> Vec<String> {
+    Reflect::own_keys(value)
+        .expect("Should be able to get keys")
+        .iter()
+        .map(|v| v.as_string())
+        .map(|v| v.expect("All keys should be str"))
+        .collect()
+}
