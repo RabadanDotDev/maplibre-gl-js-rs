@@ -236,6 +236,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "display-a-map-with-html-container"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "log",
+ "maplibre-gl-js",
+ "wasm-logger",
+ "yew",
+]
+
+[[package]]
 name = "equivalent"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
