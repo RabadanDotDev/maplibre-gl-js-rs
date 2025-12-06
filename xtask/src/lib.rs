@@ -13,6 +13,9 @@ pub fn run_if_precommit() -> anyhow::Result<bool> {
         ctx.rustfmt()?;
         ctx.stage_new_changes()?;
 
+        // Run checks
+        cli::run_checks()?;
+
         anyhow::Ok(true)
     } else {
         anyhow::Ok(false)
