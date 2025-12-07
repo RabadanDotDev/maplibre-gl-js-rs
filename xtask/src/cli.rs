@@ -87,6 +87,11 @@ fn run_install_dependencies() -> anyhow::Result<()> {
         .log_cmd(log::Level::Trace)
         .log_err(log::Level::Trace)
         .run()?;
+    cmd!("cargo", "install", "trunk", "--version", "^0.21")
+        .current_dir(&root)
+        .log_cmd(log::Level::Trace)
+        .log_err(log::Level::Trace)
+        .run()?;
 
     Ok(())
 }
