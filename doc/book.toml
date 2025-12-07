@@ -1,0 +1,15 @@
+[book]
+authors = ["Raul Rabadan Arroyo"]
+language = "en"
+src = "src"
+title = "Unofficial MapLibre GL Rust bindings"
+
+[build]
+extra-watch-dirs = ["../examples", "../xtask"]
+
+[preprocessor.examples]
+command = "cargo xtask book-generate-examples"
+
+[output.html]
+git-repository-url = "https://github.com/RabadanDotDev/maplibre-gl-js-rs/tree/main"
+
