@@ -18,6 +18,7 @@ impl Cli {
             Command::RegularTest => run_regular_tests(),
             Command::WasmTest(wasm_test_opts) => run_wasm_tests(wasm_test_opts),
             Command::Checks => run_checks(),
+            Command::ServeBook => run_serve_book(),
         }
     }
 }
@@ -31,6 +32,7 @@ enum Command {
     RegularTest,
     WasmTest(WasmTestOpts),
     Checks,
+    ServeBook,
 }
 
 #[derive(Args)]
@@ -176,6 +178,18 @@ pub fn run_checks() -> anyhow::Result<()> {
     run_wasm_tests(WasmTestOpts {
         mode: Some(WasmTestMode::HeadlessChromeAndFirefox),
     })?;
+
+    Ok(())
+}
+
+fn run_serve_book() -> anyhow::Result<()> {
+    let root = locate_project_root()?;
+
+    cmd!("mdbook", "serve")
+        .current_dir(root.join("doc"))
+        .log_cmd(log::Level::Trace)
+        .log_err(log::Level::Trace)
+        .run()?;
 
     Ok(())
 }
