@@ -1,6 +1,8 @@
 use clap::{Args, Parser, Subcommand};
 use devx_cmd::cmd;
 use devx_pre_commit::locate_project_root;
+use mdbook::preprocess::{CmdPreprocessor, Preprocessor as _};
+use semver::{Version, VersionReq};
 
 #[derive(Parser)]
 pub struct Cli {
@@ -19,6 +21,7 @@ impl Cli {
             Command::WasmTest(wasm_test_opts) => run_wasm_tests(wasm_test_opts),
             Command::Checks => run_checks(),
             Command::ServeBook => run_serve_book(),
+            Command::BookGenerateExamples(v) => run_book_generate_examples(v),
         }
     }
 }
@@ -33,6 +36,8 @@ enum Command {
     WasmTest(WasmTestOpts),
     Checks,
     ServeBook,
+    #[command(hide = true)]
+    BookGenerateExamples(BookGenerateExamples),
 }
 
 #[derive(Args)]
@@ -74,6 +79,20 @@ enum WasmTestMode {
     Chrome,
     /// Test with non-headless Firefox,
     Firefox,
+}
+
+#[derive(Args)]
+struct BookGenerateExamples {
+    #[command(subcommand)]
+    supports: Option<BookGenerateExamplesSupports>,
+}
+
+#[derive(Subcommand)]
+enum BookGenerateExamplesSupports {
+    Supports {
+        #[arg(required = true)]
+        renderer: String,
+    },
 }
 
 fn run_install_pre_commit_hook() -> anyhow::Result<()> {
@@ -192,4 +211,41 @@ fn run_serve_book() -> anyhow::Result<()> {
         .run()?;
 
     Ok(())
+}
+
+fn run_book_generate_examples(cmd: BookGenerateExamples) -> anyhow::Result<()> {
+    let mut examples_dir = locate_project_root()?;
+    examples_dir.push("examples");
+    let pre = crate::book::ExamplesPreprocessor { examples_dir };
+
+    if let Some(supports) = cmd.supports {
+        let renderer = match supports {
+            BookGenerateExamplesSupports::Supports { renderer } => renderer,
+        };
+        if pre.supports_renderer(&renderer) {
+            Ok(())
+        } else {
+            Err(std::io::Error::new(std::io::ErrorKind::Unsupported, "").into())
+        }
+    } else {
+        let (ctx, book) = CmdPreprocessor::parse_input(std::io::stdin())?;
+
+        let book_version = Version::parse(&ctx.mdbook_version)?;
+        let version_req = VersionReq::parse(mdbook::MDBOOK_VERSION)?;
+
+        if !version_req.matches(&book_version) {
+            eprintln!(
+                "Warning: The {} plugin was built against version {} of mdbook, \
+             but we're being called from version {}",
+                pre.name(),
+                mdbook::MDBOOK_VERSION,
+                ctx.mdbook_version
+            );
+        }
+
+        let processed_book = pre.run(&ctx, book)?;
+        serde_json::to_writer(std::io::stdout(), &processed_book)?;
+
+        Ok(())
+    }
 }
