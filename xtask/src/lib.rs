@@ -1,5 +1,6 @@
 use devx_pre_commit::{PreCommitContext, locate_project_root};
 
+mod book;
 mod cli;
 
 pub use cli::Cli;
