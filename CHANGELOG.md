@@ -75,6 +75,8 @@
 
 
 - Add book preprocessor to generate examples - ([b906929](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/b906929604e5c6e3681e14d43afff4566bc7746d))
+- Add serve book command ([0b8d3d0](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/0b8d3d0e8a1a506beb7f6e2d57cea93e34254452))
+- Include mdbook in install dependencies ([beda0a1](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/beda0a15ea4efc6fcb77e084b0d7243b640274f6))
 - Add trunk to install dependencies - ([da63d0c](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/da63d0c59c5955a783b6dc04bb273fa9e68735cd))
 - Add installdeps/format/clippy/test/wasmtest/check commands - ([7a412cc](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/7a412cc666079521606e0ce824486c0b365ea0bc))
 - Add pre-commit hook - ([13fa515](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/13fa5150b8f4ac08de4e2ad2f4cba3ea5c97b965))
