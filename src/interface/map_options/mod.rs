@@ -33,6 +33,9 @@ pub struct MapOptions {
     /// Initial position of the map. Defaults to the style or the center
     #[serde(skip_serializing_if = "Option::is_none")]
     pub center: Option<LngLatLike>,
+    /// Whether the map is interactive or not. Defaults to `true`
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub interactive: Option<bool>,
     // TODO: Support all options
 }
 
@@ -45,6 +48,7 @@ impl MapOptions {
             zoom: None,
             maplibre_logo: None,
             center: None,
+            interactive: None,
         }
     }
 
@@ -89,6 +93,15 @@ impl MapOptions {
     pub fn with_center(self, center: impl Into<LngLatLike>) -> Self {
         Self {
             center: Some(center.into()),
+            ..self
+        }
+    }
+
+    /// Mark the map as not interactive
+    #[must_use]
+    pub fn without_interactivity(self) -> Self {
+        Self {
+            interactive: Some(false),
             ..self
         }
     }
@@ -219,5 +232,18 @@ mod test {
 
         assert_eq!(keys.len(), 2);
         assert_eq!(map_rust.center.unwrap(), retreived_center_rs);
+    }
+
+    #[wasm_bindgen_test]
+    fn map_without_interactivity() {
+        let map_rust = MapOptions::new("identifier_of_map").without_interactivity();
+        let map_js = map_rust
+            .as_js_value()
+            .expect("Conversion from MapContainer with identifier to JS should work");
+        let maplibre_interactive_rs: Boolean = get_value_from_object(&map_js, "interactive").into();
+        let keys = get_key_list_from_object(&map_js);
+
+        assert_eq!(keys.len(), 2);
+        assert!(!maplibre_interactive_rs.value_of());
     }
 }
