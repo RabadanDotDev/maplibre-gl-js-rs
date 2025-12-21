@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+## [0.0.2](https://github.com/RabadanDotDev/maplibre-gl-js-rs/compare/maplibre-gl-js-v0.0.1...maplibre-gl-js-v0.0.2)
+
+### Features
+
+
+- *(interactive)* Add interactive option to MapOptions - ([0178c8f](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/0178c8ffea4cab631c38c25886c9cd5524aec87f))
+
+### Example
+
+
+- Add Display a non-interactive map example - ([f19b433](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/f19b43301ca9ad9b7a759a856aac93e787f194ba))
+
+
 ## [0.0.1](https://github.com/RabadanDotDev/maplibre-gl-js-rs/compare/maplibre-gl-js-v0.0.0...maplibre-gl-js-v0.0.1)
 
 ### Documentation
