@@ -5,6 +5,7 @@ members = [
   "xtask",
   "examples/display-a-map",
   "examples/display-a-map-with-html-container",
+  "examples/display-non-interactive-map",
 ]
 
 [package]
