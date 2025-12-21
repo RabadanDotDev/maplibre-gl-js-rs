@@ -17,6 +17,7 @@ readme = "README.md"
 keywords = ["wasm", "maplibre-gl-js"]
 categories = ["wasm", "web-programming"]
 repository = "https://github.com/RabadanDotDev/maplibre-gl-js-rs"
+homepage = "https://rabadandotdev.github.io/maplibre-gl-js-rs/"
 
 [dependencies]
 serde = "1.0.228"
