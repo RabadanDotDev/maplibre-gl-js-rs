@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [0.0.1](https://github.com/RabadanDotDev/maplibre-gl-js-rs/compare/maplibre-gl-js-v0.0.0...maplibre-gl-js-v0.0.1)
+
+### Documentation
+
+
+- Set README badges to default style - ([32bbf95](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/32bbf95ec4312afbdd89933a79e6a649ccb4ea85))
+
+
 ## [0.0.0]
 
 ### Features
