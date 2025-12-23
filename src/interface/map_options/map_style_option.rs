@@ -10,7 +10,9 @@ use wasm_bindgen::JsValue;
 pub enum MapStyleOption {
     /// URL to a JSON object following the MapLibre Style Specification
     URL(String),
-    // TODO: Support direct style specification
+    /// JSON representing a non-validated MapLibre `StyleSpecification`
+    JsonStyleSpecification(serde_json::Value),
+    // TODO: Support validated style spec
 }
 
 impl MapStyleOption {
@@ -20,7 +22,7 @@ impl MapStyleOption {
     ///
     /// Propagates `serde_wasm_bindgen` conversion errors
     pub fn as_js_value(&self) -> Result<JsValue, super::Error> {
-        serde_wasm_bindgen::to_value(self)
+        self.serialize(&serde_wasm_bindgen::Serializer::json_compatible())
     }
 }
 
@@ -33,6 +35,12 @@ impl From<&str> for MapStyleOption {
 impl From<String> for MapStyleOption {
     fn from(value: String) -> Self {
         Self::URL(value)
+    }
+}
+
+impl From<serde_json::Value> for MapStyleOption {
+    fn from(value: serde_json::Value) -> Self {
+        Self::JsonStyleSpecification(value)
     }
 }
 
@@ -62,8 +70,12 @@ impl TryFrom<&MapStyleOption> for JsValue {
 
 #[cfg(test)]
 mod test {
+    use crate::test_utils::{get_key_list_from_object, get_value_from_object};
+
     use super::*;
+    use serde_json::json;
     use wasm_bindgen_test::*;
+    use web_sys::js_sys::Array;
 
     #[wasm_bindgen_test]
     fn map_style_url_conversion() {
@@ -81,5 +93,46 @@ mod test {
             "url"
         );
         assert_eq!(map_style, map_style_retrieved);
+    }
+
+    #[wasm_bindgen_test]
+    #[allow(clippy::cast_possible_truncation)]
+    fn map_style_json_spec_conversion() {
+        let value = json!({
+            "version": 8,
+            "sources": {
+                "satellite": {
+                    "type": "raster",
+                    "tiles": [
+                        "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg"
+                    ],
+                    "tileSize": 256
+                }
+            },
+            "layers": [{
+                "id": "satellite",
+                "type": "raster",
+                "source": "satellite"
+            }]
+        });
+        let map_style: MapStyleOption = value.into();
+        let map_style_js = map_style
+            .as_js_value()
+            .expect("Should be able to convert to JsValue");
+        let map_style_retrieved = MapStyleOption::try_from(map_style_js.clone())
+            .expect("Should be able to back convert map style");
+
+        assert_eq!(map_style, map_style_retrieved);
+
+        let fields = get_key_list_from_object(&map_style_js);
+        let version = get_value_from_object(&map_style_js, "version");
+        let sources = get_value_from_object(&map_style_js, "sources");
+        let layers = get_value_from_object(&map_style_js, "layers");
+        let sources_keys = get_key_list_from_object(&sources);
+
+        assert_eq!(fields.len(), 3);
+        assert_eq!(version.as_f64().unwrap() as i32, 8);
+        assert_eq!(sources_keys, vec!["satellite"]);
+        assert_eq!(Array::from(&layers).to_vec().len(), 1);
     }
 }

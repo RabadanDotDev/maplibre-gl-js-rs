@@ -112,8 +112,8 @@ impl MapOptions {
     ///
     /// Propagates `serde_wasm_bindgen` conversion errors
     pub fn as_js_value(&self) -> Result<bindings::MapOptions, super::Error> {
-        Ok(bindings::MapOptions::from(serde_wasm_bindgen::to_value(
-            self,
+        Ok(bindings::MapOptions::from(self.serialize(
+            &serde_wasm_bindgen::Serializer::json_compatible(),
         )?))
     }
 
@@ -141,6 +141,7 @@ mod test {
     use crate::test_utils::{gen_html_element, get_key_list_from_object, get_value_from_object};
 
     use super::*;
+    use serde_json::json;
     use wasm_bindgen_test::*;
     use web_sys::js_sys::Boolean;
 
@@ -245,5 +246,34 @@ mod test {
 
         assert_eq!(keys.len(), 2);
         assert!(!maplibre_interactive_rs.value_of());
+    }
+
+    #[wasm_bindgen_test]
+    fn map_with_json_style() {
+        let map_rust = MapOptions::new("identifier_of_map").with_style(json!({
+            "version": 8,
+            "sources": {
+                "satellite": {
+                    "type": "raster",
+                    "tiles": [
+                        "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg"
+                    ],
+                    "tileSize": 256
+                }
+            },
+            "layers": [{
+                "id": "satellite",
+                "type": "raster",
+                "source": "satellite"
+            }]
+        }));
+        let map_js = map_rust
+            .as_js_value()
+            .expect("Conversion from MapContainer with identifier to JS should work");
+        let map_style_js = get_value_from_object(&map_js, "style");
+        let keys = get_key_list_from_object(&map_js);
+
+        assert_eq!(keys.len(), 2);
+        assert_eq!(get_key_list_from_object(&map_style_js).len(), 3);
     }
 }
