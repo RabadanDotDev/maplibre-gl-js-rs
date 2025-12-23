@@ -6,6 +6,7 @@ use wasm_bindgen::JsValue;
 /// The map style
 #[derive(Debug, PartialEq, Eq, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
+#[non_exhaustive]
 pub enum MapStyleOption {
     /// URL to a JSON object following the MapLibre Style Specification
     URL(String),
