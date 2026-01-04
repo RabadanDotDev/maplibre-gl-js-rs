@@ -12,7 +12,7 @@ members = [
 
 [package]
 name = "maplibre-gl-js"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2024"
 description = "Unofficial MapLibre GL JS Rust bindings"
 license = "BSD-3-Clause"

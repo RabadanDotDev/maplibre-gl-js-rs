@@ -2,6 +2,35 @@
 
 ## [Unreleased]
 
+## [0.0.2](https://github.com/RabadanDotDev/maplibre-gl-js-rs/compare/maplibre-gl-js-v0.0.1...maplibre-gl-js-v0.0.2)
+
+### Features
+
+
+- *(interface)* Add all fields to MapOptions and implement basic ones - ([8a13294](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/8a132942cf3ffdf2248337a95d8028820bf372d9))
+- *(interface)* Add non-validated JsonStyleSpecification to style variants - ([f915b33](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/f915b33787ec4a82faeefc73f0ca22a3f0c004ac))
+- *(interface)* Add interactive option to MapOptions - ([2b7e1e1](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/2b7e1e14e8fbac3f13a1c11a3cab4a6e4ad59e4f))
+
+### Refactor
+
+
+- *(interface)* [**breaking**] Mark MapStyleOption as non-exhaustive - ([8e463e6](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/8e463e6c52bc78624915777c2168c461ad42e42f))
+- *(interface)* [**breaking**]: Generate MapOptions fields through a declarative macro - ([0693aa3](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/0693aa308915c3529967b705fd6f8e9436713a5d))
+
+### Build
+
+
+- Add paste to dependencies - ([ff19e8a](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/ff19e8a0627e37079347e14431edf90876d38b51))
+- Add serde_json dependency - ([74dae47](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/74dae478a1024cc178a3b5ab3f34220ed747d4a0))
+
+### Example
+
+
+- Add 'Add a raster tile source' example - ([33710c6](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/33710c61d115c514c20835d90677adb8adf8e96b))
+- Add Display a satellite map example - ([292c544](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/292c544d9907ca3f2d66396d4b37b783a97d137a))
+- Add Display a non-interactive map example - ([9a50637](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/9a50637fe35e606bdac3bec676425e56d087966f))
+
+
 ## [0.0.1](https://github.com/RabadanDotDev/maplibre-gl-js-rs/compare/maplibre-gl-js-v0.0.0...maplibre-gl-js-v0.0.1)
 
 ### Documentation
