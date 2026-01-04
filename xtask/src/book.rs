@@ -62,13 +62,19 @@ impl Preprocessor for ExamplesPreprocessor {
             .ok_or(Error::msg("Missing examples chapter"))?;
 
         // List all the examples
-        std::fs::read_dir(&self.examples_dir)
+        let mut example_folders: Vec<PathBuf> = std::fs::read_dir(&self.examples_dir)
             .expect("Directory should be valid")
             .filter_map(|e| {
                 let e = e.ok()?;
                 let meta = e.metadata().ok()?;
                 if meta.is_dir() { Some(e.path()) } else { None }
             })
+            .collect();
+        example_folders.sort();
+
+        // Build examples
+        example_folders
+            .into_iter()
             .enumerate()
             .for_each(|(index, path)| make_append_example(examples, index as u32 + 1, path));
 
