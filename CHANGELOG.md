@@ -15,7 +15,7 @@
 
 
 - *(interface)* [**breaking**] Mark MapStyleOption as non-exhaustive - ([8e463e6](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/8e463e6c52bc78624915777c2168c461ad42e42f))
-- Refactor!(interface): Generate MapOptions fields through a declarative macro - ([0693aa3](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/0693aa308915c3529967b705fd6f8e9436713a5d))
+- *(interface)* [**breaking**]: Generate MapOptions fields through a declarative macro - ([0693aa3](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/0693aa308915c3529967b705fd6f8e9436713a5d))
 
 ### Build
 
