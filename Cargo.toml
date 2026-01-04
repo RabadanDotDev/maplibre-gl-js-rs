@@ -3,6 +3,7 @@ resolver = "3"
 members = [
   ".",
   "xtask",
+  "examples/add-a-raster-tile-source",
   "examples/display-a-map",
   "examples/display-a-map-with-html-container",
   "examples/display-non-interactive-map",
