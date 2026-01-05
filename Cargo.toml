@@ -4,6 +4,7 @@ members = [
   ".",
   "xtask",
   "examples/add-a-raster-tile-source",
+  "examples/add-a-wms-source",
   "examples/display-a-map",
   "examples/display-a-map-with-html-container",
   "examples/display-non-interactive-map",

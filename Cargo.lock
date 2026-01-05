@@ -15,6 +15,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "add-a-wms-source"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "log",
+ "maplibre-gl-js",
+ "serde_json",
+ "wasm-logger",
+ "yew",
+]
+
+[[package]]
 name = "aho-corasick"
 version = "1.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
