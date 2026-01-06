@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [0.0.3](https://github.com/RabadanDotDev/maplibre-gl-js-rs/compare/maplibre-gl-js-v0.0.2...maplibre-gl-js-v0.0.3)
+
+### Example
+
+
+- Add 'Check if WebGL is supported' example - ([8c3e4fe](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/8c3e4fe16cfffef0838c221c5ed39b319c4ee4dc))
+- Add 'Add a WMS source' example - ([36e1b0e](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/36e1b0ed42e2c20dcab541069ac76f1b34a07639))
+
+
 ## [0.0.2](https://github.com/RabadanDotDev/maplibre-gl-js-rs/compare/maplibre-gl-js-v0.0.1...maplibre-gl-js-v0.0.2)
 
 ### Features
