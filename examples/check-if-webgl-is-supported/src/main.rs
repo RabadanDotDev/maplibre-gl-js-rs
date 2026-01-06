@@ -1,6 +1,6 @@
 use maplibre_gl_js::interface::MapOptions;
 use web_sys::{HtmlCanvasElement, js_sys::Reflect, wasm_bindgen::JsValue};
-use yew::{Html, function_component, html, use_effect};
+use yew::{Html, function_component, html, use_effect, use_state};
 
 fn is_webgl_supported() -> bool {
     let window = web_sys::window().expect("Window should be available");
@@ -42,7 +42,11 @@ fn is_webgl_supported() -> bool {
 #[function_component(App)]
 fn app() -> Html {
     let webgl_supported = is_webgl_supported();
+    let map_rendered = use_state(|| false);
     use_effect(move || {
+        if *map_rendered {
+            return;
+        }
         if webgl_supported {
             MapOptions::new("map")
                 .with_style("https://demotiles.maplibre.org/style.json")
@@ -50,6 +54,7 @@ fn app() -> Html {
                 .with_zoom(2.)
                 .build()
                 .expect("Creating a map should work");
+            map_rendered.set(true);
         }
     });
     html! { if webgl_supported { <div id="map"></div> } else { <p>{"WebGl not supported"}</p> } }

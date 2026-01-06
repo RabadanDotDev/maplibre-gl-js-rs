@@ -1,9 +1,13 @@
 use maplibre_gl_js::interface::MapOptions;
-use yew::{Html, function_component, html, use_effect};
+use yew::{Html, function_component, html, use_effect, use_state};
 
 #[function_component(App)]
 fn app() -> Html {
+    let map_rendered = use_state(|| false);
     use_effect(move || {
+        if *map_rendered {
+            return;
+        }
         MapOptions::new("map")
             .with_style("https://demotiles.maplibre.org/style.json")
             .with_center([74.5, 40.])
@@ -11,6 +15,7 @@ fn app() -> Html {
             .without_interactivity()
             .build()
             .expect("Creating a map should work");
+        map_rendered.set(true);
     });
     html! { <div id="map"></div> }
 }

@@ -1,13 +1,17 @@
 use maplibre_gl_js::interface::{HtmlElement, MapOptions};
-use yew::{Html, function_component, html, use_effect, use_node_ref};
+use yew::{Html, function_component, html, use_effect, use_node_ref, use_state};
 
 #[function_component(App)]
 fn app() -> Html {
     let container_ref = use_node_ref();
+    let map_rendered = use_state(|| false);
 
     {
         let container_ref = container_ref.clone();
         use_effect(move || {
+            if *map_rendered {
+                return;
+            }
             let container = container_ref
                 .cast::<HtmlElement>()
                 .expect("Container should be a valid HtmlElement");
@@ -18,6 +22,7 @@ fn app() -> Html {
                 .with_maplibre_logo()
                 .build()
                 .expect("Creating a map should work");
+            map_rendered.set(true);
         });
     }
 
