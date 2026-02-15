@@ -13,6 +13,7 @@ members = [
   "examples/display-non-interactive-map",
   "examples/display-a-satellite-map",
   "examples/set-pitch-and-bearing",
+  "examples/style-labels-with-local-fonts",
 ]
 
 [package]
