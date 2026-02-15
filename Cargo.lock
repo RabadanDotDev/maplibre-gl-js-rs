@@ -688,6 +688,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "display-a-map-with-mlt"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "log",
+ "maplibre-gl-js",
+ "wasm-logger",
+ "yew",
+]
+
+[[package]]
 name = "display-a-satellite-map"
 version = "0.1.0"
 dependencies = [

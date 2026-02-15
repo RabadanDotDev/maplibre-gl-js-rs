@@ -1,0 +1,4 @@
+[build]
+target = "index.html"
+html_output = "index.html"
+public_url = "."

@@ -9,6 +9,7 @@ members = [
   "examples/display-a-globe-with-an-atmosphere",
   "examples/display-a-map",
   "examples/display-a-map-with-html-container",
+  "examples/display-a-map-with-mlt",
   "examples/display-non-interactive-map",
   "examples/display-a-satellite-map",
 ]
