@@ -6,6 +6,7 @@ members = [
   "examples/add-a-raster-tile-source",
   "examples/add-a-wms-source",
   "examples/check-if-webgl-is-supported",
+  "examples/display-a-globe-with-an-atmosphere",
   "examples/display-a-map",
   "examples/display-a-map-with-html-container",
   "examples/display-non-interactive-map",
