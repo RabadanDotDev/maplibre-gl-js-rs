@@ -11,7 +11,7 @@ use web_sys::{
 
 wasm_bindgen_test::wasm_bindgen_test_configure!(run_in_browser);
 
-const MAPLIBRE_SCRIPT_SRC: &str = "https://unpkg.com/maplibre-gl@^5.12.0/dist/maplibre-gl.js";
+const MAPLIBRE_SCRIPT_SRC: &str = "https://unpkg.com/maplibre-gl@^5.18.0/dist/maplibre-gl.js";
 const MAPLIBRE_ID: &str = "maplibre-gl-e1b6fcf0-2a8c-46ae-9c7e-deeb271d32d7";
 
 /// `web_sys::HtmlElement` which will clean up the element when it is dropped
