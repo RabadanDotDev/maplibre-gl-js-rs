@@ -103,7 +103,7 @@ fn run_install_pre_commit_hook() -> anyhow::Result<()> {
 fn run_install_dependencies() -> anyhow::Result<()> {
     let root = locate_project_root()?;
 
-    cmd!("cargo", "install", "wasm-pack", "--version", "^0.13")
+    cmd!("cargo", "install", "wasm-pack", "--version", "^0.14")
         .current_dir(&root)
         .log_cmd(log::Level::Trace)
         .log_err(log::Level::Trace)
