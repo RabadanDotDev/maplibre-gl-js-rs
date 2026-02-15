@@ -12,6 +12,7 @@ members = [
   "examples/display-a-map-with-mlt",
   "examples/display-non-interactive-map",
   "examples/display-a-satellite-map",
+  "examples/set-pitch-and-bearing",
 ]
 
 [package]

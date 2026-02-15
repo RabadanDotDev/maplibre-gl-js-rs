@@ -2696,6 +2696,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "set-pitch-and-bearing"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "log",
+ "maplibre-gl-js",
+ "wasm-logger",
+ "yew",
+]
+
+[[package]]
 name = "sha1"
 version = "0.10.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
