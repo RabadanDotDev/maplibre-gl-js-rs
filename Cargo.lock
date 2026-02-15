@@ -2833,6 +2833,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "style-labels-with-web-fonts"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "log",
+ "maplibre-gl-js",
+ "serde_json",
+ "wasm-logger",
+ "yew",
+]
+
+[[package]]
 name = "syn"
 version = "1.0.109"
 source = "registry+https://github.com/rust-lang/crates.io-index"
