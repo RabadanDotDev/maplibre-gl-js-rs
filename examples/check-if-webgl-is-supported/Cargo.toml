@@ -6,9 +6,9 @@ publish = false
 
 [dependencies]
 console_error_panic_hook = "0.1.7"
-log = "0.4.28"
+log = "0.4.29"
 wasm-logger = "0.2.0"
 yew = { version = "0.21.0", features = ["csr"] }
 maplibre-gl-js = { path="../../"}
-web-sys = { version = "0.3.83", features = ["HtmlCanvasElement", "WebGlRenderingContext", "Window"] }
+web-sys = { version = "0.3.85", features = ["HtmlCanvasElement", "WebGlRenderingContext", "Window"] }
 

@@ -5,16 +5,16 @@ edition = "2024"
 publish = false
 
 [dependencies]
-anyhow = "1.0.100"
+anyhow = "1.0.101"
 chromiumoxide = "0.8.0"
-clap = { version = "4.5.53", features = ["derive"] }
+clap = { version = "4.5.58", features = ["derive"] }
 devx-cmd = "0.5.0"
 devx-pre-commit = "0.5.0"
 futures = "0.3.31"
-log = "0.4.28"
+log = "0.4.29"
 mdbook = "0.4.52"
 semver = "1.0.27"
-serde_json = "1.0.145"
+serde_json = "1.0.149"
 simple_logger = { version = "5.1.0", features = ["stderr"] }
-tokio = "1.48.0"
+tokio = "1.49.0"
 
