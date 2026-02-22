@@ -2,6 +2,35 @@
 
 ## [Unreleased]
 
+## [0.0.3](https://github.com/RabadanDotDev/maplibre-gl-js-rs/compare/maplibre-gl-js-v0.0.2...maplibre-gl-js-v0.0.3)
+
+### Features
+
+
+- *(bindings)* Add LngLatBounds and LngLatBoundsLike - ([e2d9530](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/e2d9530d9b7430ecfdc541416b3bc268ac7ab669))
+
+### Testing
+
+
+- Bump tracked MapLibre GL JS version - ([d09b0de](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/d09b0de0f9b6e4e506e7c36c4365781c975f009d))
+
+### Build
+
+
+- Bump dependencies - ([ece03e0](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/ece03e0b06ca277cbe7b297e2d2283b52ead70d4))
+
+### Example
+
+
+- Add 'Style labels with Web fonts' example - ([77c8156](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/77c8156cafee462c55801638875f3d5425703c42))
+- Add 'Style labels with local fonts' example - ([1ff0904](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/1ff090488301f304dabb5c69072e743dd332b851))
+- Add 'Set pitch and bearing' example - ([9d19c5e](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/9d19c5e5ffc776d3ba89c2bdb320bd9081d7352f))
+- Add 'Display a map with MLT' example - ([c1d8e30](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/c1d8e3001cd16f4f3be66e32f13c1ccba98e93dd))
+- Add 'Display a globe with an atmosphere' example - ([62eae3d](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/62eae3d6590e29c11ef50bf307e3d513cd27a7b7))
+- Add 'Check if WebGL is supported' example - ([a186167](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/a18616724f126364c6bb58f234a09571cce6a10d))
+- Add 'Add a WMS source' example - ([36e1b0e](https://github.com/RabadanDotDev/maplibre-gl-js-rs/commit/36e1b0ed42e2c20dcab541069ac76f1b34a07639))
+
+
 ## [0.0.2](https://github.com/RabadanDotDev/maplibre-gl-js-rs/compare/maplibre-gl-js-v0.0.1...maplibre-gl-js-v0.0.2)
 
 ### Features
